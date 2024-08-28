@@ -1,6 +1,10 @@
+import SignUpPage from "./components/SignUpPage";
+
 const  App = () =>{
   return(
-    <></>
+    <>
+    <SignUpPage />
+    </>
   );
 }
 
