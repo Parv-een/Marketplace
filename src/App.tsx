@@ -1,12 +1,13 @@
 import SignUpPage from "./components/SignUpPage";
 
-const  App = () =>{
-  return(
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const App = () => {
+  return (
     <>
-    <SignUpPage />
+      <SignUpPage />
     </>
   );
-}
-
+};
 
 export default App;
