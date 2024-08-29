@@ -1,7 +1,10 @@
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useState } from "react";
 import Address from "../models/Address";
+import classes from "./SignUpPage.module.css";
 
+//TODO : add validation for password
+//TODO : age older than 18 years
 const SignUpPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -20,8 +23,8 @@ const SignUpPage = () => {
   });
 
   return (
-    <Container>
-      <h3>Sign Up</h3>
+    <Container className={classes.container + "center"}>
+      <h3 className={classes.title}>Sign Up</h3>
       <Row>
         <Form>
           <Row>
