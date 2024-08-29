@@ -4,7 +4,7 @@ import Address from "../models/Address";
 import classes from "./SignUpPage.module.css";
 import FormInput from "../components/FormInput";
 
-const getMinDate = () => {
+const getMaxDate = () => {
   const date = new Date();
   date.setFullYear(date.getFullYear() - 18);
   return date;
@@ -108,7 +108,7 @@ const SignUpPage = () => {
                 title="Date Of Birth"
                 value={dateOfBirth}
                 onChange={(e) => setDateOfBirth(new Date(e.target.value))}
-                min={getMinDate().toISOString().split("T")[0]}
+                max={getMaxDate().toISOString().split("T")[0]}
               ></FormInput>
             </Col>
           </Row>
