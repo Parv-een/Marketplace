@@ -1,5 +1,15 @@
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Eczar:wght@400..800&display=swap');
+
+
 *  {
     box-sizing: border-box;
+    font-family:Eczar;
+
 }  
 
 .center {

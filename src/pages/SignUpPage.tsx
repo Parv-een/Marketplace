@@ -1,5 +1,5 @@
-import { Col, Container, Form, Row } from "react-bootstrap";
-import { useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { FormEvent, useState } from "react";
 import Address from "../models/Address";
 import classes from "./SignUpPage.module.css";
 
@@ -11,7 +11,7 @@ const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [validated, setValidated] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>();
   const [address, setAddress] = useState<Address>({
     street: "",
@@ -22,20 +22,59 @@ const SignUpPage = () => {
     country: "",
   });
 
+  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (form.checkValidity() === false) {
+      alert("Please fill out all the fields");
+      return;
+    }
+
+    setValidated(true);
+
+    if (password !== confirmPassword) {
+      alert("Password do not match");
+      return;
+    }
+
+    alert(
+      JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        address,
+        password,
+        confirmPassword,
+      })
+    );
+  };
+
+  // if (password !== confirmPassword) {
+  //   alert("Password do not match");
+  // }
+
   return (
-    <Container className={classes.container + "center"}>
+    <Container className={classes.container}>
       <h3 className={classes.title}>Sign Up</h3>
       <Row>
-        <Form>
+        <Form noValidate validated={validated} onSubmit={onSubmitHandler}>
           <Row>
             <Col>
               <Form.Label htmlFor="firstName">First Name</Form.Label>
               <Form.Control
                 type="text"
                 id="firstName"
+                required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
+              <Form.Control.Feedback type="invalid">
+                Invalid Input
+              </Form.Control.Feedback>
             </Col>
 
             <Col>
@@ -165,7 +204,7 @@ const SignUpPage = () => {
             <Col>
               <Form.Label htmlFor="password">Password</Form.Label>
               <Form.Control
-                type="text"
+                type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -184,6 +223,17 @@ const SignUpPage = () => {
                 />
               </Form.Group>
             </Col>
+          </Row>
+          <br></br>
+          <Row>
+            <Button
+              onClick={() => onSubmitHandler}
+              variant="dark"
+              className={classes.submit_btn}
+              type="submit"
+            >
+              Sign UP
+            </Button>
           </Row>
         </Form>
       </Row>
