@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import Address from "../models/Address";
 import classes from "./SignUpPage.module.css";
 import FormInput from "../components/FormInput";
+import { useNavigate } from "react-router-dom";
 
 const getMaxDate = () => {
   const date = new Date();
@@ -13,6 +14,8 @@ const getMaxDate = () => {
 //done : add validation for password
 //TODO : age older than 18 years
 const SignUpPage = () => {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,28 +38,39 @@ const SignUpPage = () => {
     e.stopPropagation();
 
     if (form.checkValidity() === false) {
-      alert("Please fill out all the fields");
+      setValidated(true);
+      // alert("Please fill out all the fields");
       return;
     }
 
-    setValidated(true);
+    // if (password !== confirmPassword) {
+    //   alert("Password do not match");
+    //   return;
+    // }
 
-    if (password !== confirmPassword) {
-      alert("Password do not match");
-      return;
-    }
+    navigate("/", {
+      state: {
+        user: {
+          firstName,
+          lastName,
+          email,
+          dateOfBirth,
+          address,
+        },
+      },
+    });
 
-    alert(
-      JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        dateOfBirth,
-        address,
-        password,
-        confirmPassword,
-      })
-    );
+    // alert(
+    //   JSON.stringify({
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     dateOfBirth,
+    //     address,
+    //     password,
+    //     confirmPassword,
+    //   })
+    // );
   };
 
   // if (password !== confirmPassword) {
@@ -242,6 +256,10 @@ const SignUpPage = () => {
           </Row>
         </Form>
       </Row>
+
+      <p>
+        Alreday a member? <a href="login-page">Login In</a>
+      </p>
     </Container>
   );
 };

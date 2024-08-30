@@ -5,7 +5,7 @@ interface FormInputProps {
   type: "text" | "email" | "password" | "date" | "number";
   required?: boolean;
   id?: string;
-  value: string | number | date;
+  value: string | number | Date;
   placeholder?: string;
   min?: string;
   max?: string;
