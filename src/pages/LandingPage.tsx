@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Users from "../models/Users";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 export default function LandingPage() {
-  const [user, setUser] = useState<Users>();
+  const { state } = useLocation();
+  const [user] = useState<Users>(state?.user);
 
   return user ? (
     <div>Landing page is under Construction</div>
